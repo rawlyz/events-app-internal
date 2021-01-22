@@ -61,7 +61,7 @@ app.post('/event', (req, res) => {
 });
 
 // Increments a like to the id
-app.post('/like', (req, res) => {
+app.post('/event/like', (req, res) => {
     // call event based on id
     var evToEdit = mockEvents.events.findIndex((obj => obj.id == req.body.id));
     // add a like to current likes
