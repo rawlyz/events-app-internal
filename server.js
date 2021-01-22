@@ -18,8 +18,8 @@ app.use(bodyParser.json());
 // from a cloud data store
 const mockEvents = {
     events: [
-        { title: '2021 Broccoli City', id: 1, description: 'Broccoli City Festival has become one of the top Music Festivals artists in the 2021 music scene' },
-        { title: 'JoJo Siwa', id: 2, description: 'What is cooler than her?' }
+        { title: '2021 Broccoli City', id: 1, description: 'Top of the 2021 music scene' , likes: 0},
+        { title: 'JoJo Siwa', id: 2, description: 'What is cooler than her?' , likes: 0 }
         
     ]
 };
@@ -57,6 +57,16 @@ app.post('/event', (req, res) => {
     // add to the mock array
     mockEvents.events.push(ev);
     // return the complete array
+    res.json(mockEvents);
+});
+
+// Increments a like to the id
+app.post('/like', (req, res) => {
+    // call event based on id
+    var evToEdit = mockEvents.events.findIndex((obj => obj.id == req.body.id));
+    // add a like to current likes
+    mockEvents.events[evToEdit].likes += 1;
+    // return complete array
     res.json(mockEvents);
 });
 

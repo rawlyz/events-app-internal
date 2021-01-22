@@ -70,3 +70,21 @@ describe('GET /', function() {
 
       });
   });
+
+    describe('POST /event/like', function() {
+    it('likes an event', function(done) {
+      request(app)
+      .post('/event/like')
+      .send({ id: 2 })
+      .set('Accept', 'application/json')
+      .expect(200)
+      .end((err, res) => {
+        if (err) {
+          return done(err);
+        }
+        chai.expect(JSON.parse(res.text).events.find(x => x.id === 2).likes).to.equal(1);
+        return done();
+      });
+
+      });
+  });
